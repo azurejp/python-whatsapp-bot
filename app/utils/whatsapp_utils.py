@@ -76,7 +76,48 @@ def process_text_for_whatsapp(text):
 
 # Define a function to handle "General" button action
 def handle_general():
+    version = current_app.config["VERSION"]
+    # URL for the WhatsApp API
+    url = f"https://graph.facebook.com/v{version}/426732087185467/messages"
+    # Access token for authorization
+    access_token = current_app.config["ACCESS_TOKEN"]
+    # Headers for the request
+    headers = {
+        "Authorization": f"Bearer {access_token}",
+        "Content-Type": "application/json"
+    }
     print("Handling 'General' button action")
+
+    to_phone = current_app.config["RECIPIENT_WAID"]
+
+    data = {
+    "messaging_product": "whatsapp",
+    "to": f"whatsapp:{to_phone}",  # recipient's phone number
+    "type": "template",
+    "template": {
+        "name": "surefire_options",  # template name
+        "language": {
+            "code": "en"
+        },
+        "components": [
+            {
+                "type": "body",
+                "parameters": [
+                    {"type": "text", "text": "Ganesh"},  # first variable
+                    # {"type": "text", "text": "October 25, 2024"}  # second variable
+                ]
+            }
+        ]
+    }
+}
+
+    # Send the request
+    response = requests.post(url, headers=headers, data=json.dumps(data))
+
+    # Print the response
+    print(response.status_code)
+    print(response.json())
+
 
 # Define a function to handle unknown button action
 def handle_unknown_button(text):
