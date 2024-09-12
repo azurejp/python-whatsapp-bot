@@ -77,8 +77,9 @@ def process_text_for_whatsapp(text):
 # Define a function to handle "General" button action
 def handle_general():
     version = current_app.config["VERSION"]
+    phone_id = current_app.config["PHONE_NUMBER_ID"]
     # URL for the WhatsApp API
-    url = f"https://graph.facebook.com/v{version}/426732087185467/messages"
+    url = f"https://graph.facebook.com/v{version}/{phone_id}/messages"
     # Access token for authorization
     access_token = current_app.config["ACCESS_TOKEN"]
     # Headers for the request
@@ -140,10 +141,11 @@ def process_whatsapp_message(body):
     if message.get('type') == 'button':
         button_text = message['button'].get('text')
         
-        # Define the switch-like behavior using a dictionary
-        button_actions = {
-            'General': handle_general,  # If text is "General", call handle_general()
-        }
+        if (button_text == "General"):
+            handle_general()
+        else:
+            handle_unknown_button(button_text)
+
     else:
         message_body = message["text"]["body"]
         response = generate_response(message_body)
