@@ -91,7 +91,8 @@ def process_whatsapp_message(body):
     logging.info(f"message: {message}")
     
 
-
+    button_actions = ""
+    message_body = ""
      # Check if the type is 'button'
     if message.get('type') == 'button':
         button_text = message['button'].get('text')
