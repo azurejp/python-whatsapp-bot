@@ -80,6 +80,7 @@ def handle_general():
     phone_id = current_app.config["PHONE_NUMBER_ID"]
     # URL for the WhatsApp API
     url = f"https://graph.facebook.com/v{version}/{phone_id}/messages"
+    print(url)
     # Access token for authorization
     access_token = current_app.config["ACCESS_TOKEN"]
     # Headers for the request
