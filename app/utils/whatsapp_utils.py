@@ -80,6 +80,7 @@ def process_whatsapp_message(body):
     name = body["entry"][0]["changes"][0]["value"]["contacts"][0]["profile"]["name"]
 
     message = body["entry"][0]["changes"][0]["value"]["messages"][0]
+    logging.info(f"message: {message}")
     message_body = message["text"]["body"]
 
     # TODO: implement custom function here
