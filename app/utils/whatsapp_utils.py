@@ -103,13 +103,14 @@ def process_whatsapp_message(body):
         }
     else:
         message_body = message["text"]["body"]
+        response = generate_response(message_body)
+
         # Get the function to execute based on the button text, or fall back to a default handler
-        action = button_actions.get(button_text, lambda: handle_unknown_button(button_text))
-        action()  # Execute the function
+        # action = button_actions.get(button_text, lambda: handle_unknown_button(button_text))
+        # action()  # Execute the function
 
     # TODO: implement custom function here
-    response = generate_response(message_body)
-
+    
     # OpenAI Integration
     # response = generate_response(message_body, wa_id, name)
     # response = process_text_for_whatsapp(response)
