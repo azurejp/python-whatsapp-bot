@@ -74,6 +74,14 @@ def process_text_for_whatsapp(text):
 
     return whatsapp_style_text
 
+# Define a function to handle "General" button action
+def handle_general():
+    print("Handling 'General' button action")
+
+# Define a function to handle unknown button action
+def handle_unknown_button(text):
+    print(f"Unknown button text: {text}")
+
 
 def process_whatsapp_message(body):
     wa_id = body["entry"][0]["changes"][0]["value"]["contacts"][0]["wa_id"]
@@ -82,6 +90,20 @@ def process_whatsapp_message(body):
     message = body["entry"][0]["changes"][0]["value"]["messages"][0]
     logging.info(f"message: {message}")
     message_body = message["text"]["body"]
+
+
+     # Check if the type is 'button'
+    if message_body.get('type') == 'button':
+        button_text = message_body['button'].get('text')
+        
+        # Define the switch-like behavior using a dictionary
+        button_actions = {
+            'General': handle_general,  # If text is "General", call handle_general()
+        }
+
+        # Get the function to execute based on the button text, or fall back to a default handler
+        action = button_actions.get(button_text, lambda: handle_unknown_button(button_text))
+        action()  # Execute the function
 
     # TODO: implement custom function here
     response = generate_response(message_body)
