@@ -89,18 +89,19 @@ def process_whatsapp_message(body):
 
     message = body["entry"][0]["changes"][0]["value"]["messages"][0]
     logging.info(f"message: {message}")
-    message_body = message["text"]["body"]
+    
 
 
      # Check if the type is 'button'
-    if message_body.get('type') == 'button':
-        button_text = message_body['button'].get('text')
+    if message.get('type') == 'button':
+        button_text = message['button'].get('text')
         
         # Define the switch-like behavior using a dictionary
         button_actions = {
             'General': handle_general,  # If text is "General", call handle_general()
         }
-
+    else:
+        message_body = message["text"]["body"]
         # Get the function to execute based on the button text, or fall back to a default handler
         action = button_actions.get(button_text, lambda: handle_unknown_button(button_text))
         action()  # Execute the function
