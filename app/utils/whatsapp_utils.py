@@ -128,7 +128,7 @@ def handle_main():
         "Authorization": f"Bearer {access_token}",
         "Content-Type": "application/json"
     }
-    print("Handling 'General' button action")
+    print("Handling 'Hi' messages")
 
     to_phone = current_app.config["RECIPIENT_WAID"]
 
@@ -160,7 +160,7 @@ def handle_starfire():
         "Authorization": f"Bearer {access_token}",
         "Content-Type": "application/json"
     }
-    print("Handling 'General' button action")
+    print("Handling 'StarFire' button action")
 
     to_phone = current_app.config["RECIPIENT_WAID"]
 
