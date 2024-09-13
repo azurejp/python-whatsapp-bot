@@ -145,6 +145,38 @@ def handle_main():
         ]
     }
 }
+    
+
+def handle_starfire():
+    version = current_app.config["VERSION"]
+    phone_id = current_app.config["PHONE_NUMBER_ID"]
+    # URL for the WhatsApp API
+    url = f"https://graph.facebook.com/{version}/{phone_id}/messages"
+    print(url)
+    # Access token for authorization
+    access_token = current_app.config["ACCESS_TOKEN"]
+    # Headers for the request
+    headers = {
+        "Authorization": f"Bearer {access_token}",
+        "Content-Type": "application/json"
+    }
+    print("Handling 'General' button action")
+
+    to_phone = current_app.config["RECIPIENT_WAID"]
+
+    data = {
+    "messaging_product": "whatsapp",
+    "to": f"whatsapp:{to_phone}",  # recipient's phone number
+    "type": "template",
+    "template": {
+        "name": "starfire_main",  # template name
+        "language": {
+            "code": "en"
+        },
+        "components": [
+        ]
+    }
+}
 
     # Send the request
     response = requests.post(url, headers=headers, data=json.dumps(data))
@@ -177,6 +209,9 @@ def process_whatsapp_message(body):
         
         if (button_text == "General"):
             handle_general()
+        if (button_text == "StarFire"):
+            handle_starfire()
+
         else:
             handle_unknown_button(button_text)
 
