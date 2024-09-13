@@ -113,6 +113,39 @@ def handle_general():
     }
 }
 
+
+# Define a function to handle "General" button action
+def handle_main():
+    version = current_app.config["VERSION"]
+    phone_id = current_app.config["PHONE_NUMBER_ID"]
+    # URL for the WhatsApp API
+    url = f"https://graph.facebook.com/v{version}/{phone_id}/messages"
+    print(url)
+    # Access token for authorization
+    access_token = current_app.config["ACCESS_TOKEN"]
+    # Headers for the request
+    headers = {
+        "Authorization": f"Bearer {access_token}",
+        "Content-Type": "application/json"
+    }
+    print("Handling 'General' button action")
+
+    to_phone = current_app.config["RECIPIENT_WAID"]
+
+    data = {
+    "messaging_product": "whatsapp",
+    "to": f"whatsapp:{to_phone}",  # recipient's phone number
+    "type": "template",
+    "template": {
+        "name": "main_option_selector",  # template name
+        "language": {
+            "code": "en"
+        },
+        "components": [
+        ]
+    }
+}
+
     # Send the request
     response = requests.post(url, headers=headers, data=json.dumps(data))
 
@@ -148,14 +181,15 @@ def process_whatsapp_message(body):
             handle_unknown_button(button_text)
 
     else:
-        message_body = message["text"]["body"]
-        response = generate_response(message_body)
-        data = get_text_message_input(current_app.config["RECIPIENT_WAID"], response)
-        send_message(data)
+        # message_body = message["text"]["body"]
+        # response = generate_response(message_body)
+        # data = get_text_message_input(current_app.config["RECIPIENT_WAID"], response)
+        # send_message(data)
         # Get the function to execute based on the button text, or fall back to a default handler
         # action = button_actions.get(button_text, lambda: handle_unknown_button(button_text))
         # action()  # Execute the function
-
+        handle_main()
+        
     # TODO: implement custom function here
     
     # OpenAI Integration
