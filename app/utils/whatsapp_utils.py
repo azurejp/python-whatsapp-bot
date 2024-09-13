@@ -105,7 +105,7 @@ def handle_general():
             {
                 "type": "body",
                 "parameters": [
-                    {"type": "text", "text": "Ganesh"},  # first variable
+                    # {"type": "text", "text": "Ganesh"},  # first variable
                     # {"type": "text", "text": "October 25, 2024"}  # second variable
                 ]
             }
@@ -174,6 +174,13 @@ def handle_starfire():
             "code": "en"
         },
         "components": [
+                   {
+                "type": "body",
+                "parameters": [
+                    # {"type": "text", "text": "Ganesh"},  # first variable
+                    # {"type": "text", "text": "October 25, 2024"}  # second variable
+                ]
+            }
         ]
     }
 }
