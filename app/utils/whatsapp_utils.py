@@ -169,7 +169,7 @@ def handle_starfire():
     "to": f"whatsapp:{to_phone}",  # recipient's phone number
     "type": "template",
     "template": {
-        "name": "starfire_main",  # template name
+        "name": "surefire_options",  # template name
         "language": {
             "code": "en"
         },
