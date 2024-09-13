@@ -119,7 +119,7 @@ def handle_main():
     version = current_app.config["VERSION"]
     phone_id = current_app.config["PHONE_NUMBER_ID"]
     # URL for the WhatsApp API
-    url = f"https://graph.facebook.com/v{version}/{phone_id}/messages"
+    url = f"https://graph.facebook.com/{version}/{phone_id}/messages"
     print(url)
     # Access token for authorization
     access_token = current_app.config["ACCESS_TOKEN"]
@@ -189,7 +189,7 @@ def process_whatsapp_message(body):
         # action = button_actions.get(button_text, lambda: handle_unknown_button(button_text))
         # action()  # Execute the function
         handle_main()
-        
+
     # TODO: implement custom function here
     
     # OpenAI Integration
