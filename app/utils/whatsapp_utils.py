@@ -223,7 +223,8 @@ def process_whatsapp_message(body):
         # Get the function to execute based on the button text, or fall back to a default handler
         # action = button_actions.get(button_text, lambda: handle_unknown_button(button_text))
         # action()  # Execute the function
-        handle_main()
+        # handle_main()
+        handle_general()
 
     # TODO: implement custom function here
     
